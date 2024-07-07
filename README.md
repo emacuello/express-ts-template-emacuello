@@ -78,6 +78,14 @@ Compila el proyecto TypeScript a JavaScript con TSC. Los archivos compilados se 
 Inicia el linter de Eslint en busca de fallas en el codigo segun la configuracion establecida.
 
 
+## A tener en cuenta:
 
+Las variables de entorno por defecto deberían ir en un archivo `.env`. Si quieres usar otro nombre, deberías configurarlo en `src/config/env.ts`.
 
+Las variables se declaran en ese archivo y se usa `Joi` para la validación de su existencia. Todas las variables que pasen por `Joi` son imprescindibles en el proyecto y el servidor no se levantará si no las encuentra. Si no quieres esta opción, puedes hacer que no pasen por `Joi` y exportarlas directamente.
 
+```javascript
+import 'dotenv/config';
+import * as joi from 'joi';
+
+const PORT = process.env.PORT;
